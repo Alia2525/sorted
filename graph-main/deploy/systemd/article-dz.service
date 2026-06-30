@@ -1,0 +1,18 @@
+[Unit]
+Description=ArticleDz Gunicorn service
+Requires=article-dz.socket
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/article-dz
+EnvironmentFile=/var/www/article-dz/.env
+ExecStart=/var/www/article-dz/.venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/article-dz.sock \
+          config.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

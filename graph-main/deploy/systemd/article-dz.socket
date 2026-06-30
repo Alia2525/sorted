@@ -1,0 +1,8 @@
+[Unit]
+Description=ArticleDz Gunicorn socket
+
+[Socket]
+ListenStream=/run/article-dz.sock
+
+[Install]
+WantedBy=sockets.target
